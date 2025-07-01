@@ -3,6 +3,7 @@ import { Server } from "socket.io"
 import path from 'path'
 import { fileURLToPath } from 'url'
 
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
@@ -13,9 +14,20 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, "public")))
 
-const expressServer = app.listen(PORT,'0.0.0.0', () => {
-    console.log(`listening on port ${PORT}`)
-})
+const http = require('http');
+const argv = require('minimist')(process.argv.slice(2));
+
+const port = argv.p || 3000;
+const host = argv.H || '0.0.0.0';
+
+const server = http.createServer((req, res) => {
+    res.end('Server running!');
+});
+
+server.listen(port, host, () => {
+    console.log(`Server running at http://${host}:${port}/`);
+});
+
 
 // state 
 const UsersState = {
