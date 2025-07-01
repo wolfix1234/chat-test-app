@@ -13,7 +13,7 @@ const app = express()
 
 app.use(express.static(path.join(__dirname, "public")))
 
-const expressServer = app.listen(PORT, () => {
+const expressServer = app.listen(PORT,'0.0.0.0', () => {
     console.log(`listening on port ${PORT}`)
 })
 
